@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>introdcution</title>
+</head>
+<body>
+<h1>What Can JavaScript Do?</h1>
+<p id="demo01">JavaScript can change HTML content.</p>
+<button onclick='document.getElementById("demo01").innerHTML="Hello JavaScript"'>Click me to change HTML connet</button>
+
+<p id="demo02">JavaScript can change HTML content.</p>
+<button onclick="document.getElementById('demo02').innerHTML='Hello Javascript'">Click me to change HTML content
+</button>
+
+<p>JavaScript can change HTML attributes.</p>
+<img id="myImg" src="../images/pic_bulboff.gif" alt="">
+<button onclick="document.getElementById('myImg').src='../images/pic_bulboff.gif'">Click me to turn off the light
+</button>
+<button onclick="document.getElementById('myImg').src='../images/pic_bulbon.gif'">Click me to turn on the light</button>
+
+<p id="demo03">JavaScript can change the style of an HTML element.</p>
+<button onclick="document.getElementById('demo03').style.fontSize='24px'">Change the style</button>
+
+<p id="demo04">JavaScript can show or hide HTML element</p>
+<button onclick="document.getElementById('demo04').style.display='none'">hide HTML element</button>
+<button onclick="document.getElementById('demo04').style.display='block'">show HTML element</button>
+</body>
+</html>
