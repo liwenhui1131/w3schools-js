@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JS Statements</title>
+</head>
+<body>
+<p>JavaScript Statements</p>
+<p id="demo01"></p>
+
+<p>JavaScript Programs</p>
+<p id="demo02"></p>
+
+<p>Semicolons</p>
+<p id="demo03"></p>
+
+<p>JavaScript Line Length and Line Breaks</p>
+<p id="demo04"></p>
+
+<p>JavaScript code blocks are written between { and }</p>
+<p id="demo05"></p>
+<p id="demo06"></p>
+<button onclick="show()">Click me</button>
+<script>
+    document.getElementById('demo01').textContent = "Hello lisi";
+
+    var x, y, z;
+    x = 5;
+    y = 6;
+    z = x + y;
+    document.getElementById('demo02').textContent = z;
+
+    var a, b, c;
+    a = 5;
+    b = 6;
+    c = x + y;
+    document.getElementById('demo02').textContent = c;
+
+    document.getElementById('demo04').textContent =
+        'Hello word';
+
+    function show() {
+        document.getElementById('demo05').textContent = 'Hello lisi';
+        document.getElementById('demo06').textContent = "How are you";
+    }
+</script>
+</body>
+</html>

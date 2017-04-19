@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Variables</title>
+</head>
+<body>
+<p>JavaScript Variables</p>
+<p id="javaScriptVariables"></p>
+
+<p id="demo01"></p>
+
+<p>Value = undefined</p>
+<p id="demo02"></p>
+
+<p>Re-Declaring JavaScript Variables</p>
+<p id="demo03"></p>
+
+<script>
+    var price1 = 5;
+    var price2 = 6;
+    var total = price1 + price2;
+    document.getElementById("javaScriptVariables").textContent = "The total is: " + total;
+
+    var person = "John Doe", carName = "Volvo", price = 200;
+    document.getElementById("demo01").textContent = carName;
+
+    var carId;
+    document.getElementById("demo02").innerHTML = carId;
+
+    var car = "Volvo";
+    var car;
+    document.getElementById("demo03").textContent = car;
+</script>
+
+</body>
+</html>
