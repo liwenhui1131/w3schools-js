@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Operators</title>
+</head>
+<body>
+<h3>JavaScript Arithmetic Operators</h3>
+<p>Addition</p>
+<p id="addition"></p>
+<p>Subtraction</p>
+<p id="subtraction"></p>
+<p>Multiplication</p>
+<p id="multiplication"></p>
+<p>Division</p>
+<p id="division"></p>
+<p>Modulus</p>
+<p id="modulus"></p>
+<p>Increment</p>
+<p id="increment"></p>
+<p>Decrement</p>
+<p id="decrement"></p>
+
+<h3>JavaScript Assignment Operators</h3>
+<p id="demo01"></p>
+<p id="demo02"></p>
+<p id="demo03"></p>
+<p id="demo04"></p>
+<p id="demo05"></p>
+
+<h3>JavaScript Comparison Operators</h3>
+<p>equal to</p>
+<p id="demo06"></p>
+<p>equal value and equal type</p>
+<p id="demo07"></p>
+<p>not equal</p>
+<p id="demo08"></p>
+<p>not equal value or not equal type</p>
+<p id="demo09"></p>
+<p>greater than</p>
+<p id="demo10"></p>
+<p>less than</p>
+<p id="demo11"></p>
+<p>greater than or equal to</p>
+<p id="demo12"></p>
+<p>less than or equal to</p>
+<p id="demo13"></p>
+
+
+<script>
+    var x = 20, y = 2;
+    document.getElementById('addition').textContent = x + y;
+    document.getElementById('subtraction').textContent = x - y;
+    document.getElementById('multiplication').textContent = x * y;
+    document.getElementById('division').textContent = x / y;
+    document.getElementById('modulus').textContent = x % y;
+    document.getElementById('increment').textContent = ++x;
+    document.getElementById('decrement').textContent = --y;
+
+    x += 5;
+    document.getElementById('demo01').textContent = x;
+    x -= 4;
+    document.getElementById('demo02').textContent = x;
+    x *= 10;
+    document.getElementById('demo03').textContent = x;
+    x /= 10;
+    document.getElementById('demo04').textContent = x;
+    x %= 3;
+    document.getElementById('demo05').textContent = x;
+
+    document.getElementById('demo06').textContent = (5=='5');
+    document.getElementById('demo07').textContent = (5==='5');
+    document.getElementById('demo08').textContent = (5!=5);
+    document.getElementById('demo09').textContent = (5!==5);
+    document.getElementById('demo10').textContent = (5>6);
+    document.getElementById('demo11').textContent = (5<6);
+    document.getElementById('demo12').textContent = (5>=6);
+    document.getElementById('demo13').textContent = (5<=6);
+
+</script>
+
+</body>
+</html>
