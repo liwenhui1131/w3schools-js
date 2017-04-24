@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Function</title>
+</head>
+<body>
+<script>
+    //    嵌套函数
+    function wakeUpAndCode() {
+        function wakeUp() {
+            console.log("I just woke up");
+        }
+
+        function code() {
+            console.log("I am ready to code now");
+        }
+
+        wakeUp();
+        code();
+    }
+    wakeUpAndCode();
+
+    //默认参数
+    function greetMyVisitors(name, profession = "The cool programmer") {
+        alert("Welcome Mr. " + name + ", " + profession);
+    };
+    greetMyVisitors("Justin Bieber", "The singer");
+    greetMyVisitors("Bob Martin");
+    greetMyVisitors("John Papa", undefined);
+
+    //缺少参数
+    function callMe(a, b, c) {
+        console.log("c is " + typeof c);
+    };
+    callMe("Code", "Morning");
+    callMe("Learn", "JavaScript", "Functions");
+
+    //Arguments对象
+    callMe("Code", "Morning", "Mr. Programmer");
+    function callMe() {
+        var i;
+        for (i = 0; i < arguments.length; i++) {
+            console.log(arguments[i]);
+        }
+        console.log("Total arguments passed: " + arguments.length);
+    };
+
+    //立即执行函数表达式
+    (function () {
+        console.log("I run on my own.");
+    }());
+</script>
+</body>
+</html>
