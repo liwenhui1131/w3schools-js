@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Data Type</title>
+</head>
+<body>
+<h3>typeof方法</h3>
+<p id="demo01"></p>
+<p id="demo02"></p>
+<p id="demo03"></p>
+<p id="demo04"></p>
+<p id="demo05"></p>
+<p id="demo06"></p>
+<p id="demo07"></p>
+<p id="demo08"></p>
+<p id="demo09"></p>
+
+<h3>constroctor property</h3>
+<p id="demo10"></p>
+<p id="demo11"></p>
+<p id="demo12"></p>
+<p id="demo13"></p>
+<p id="demo14"></p>
+<p id="demo15"></p>
+<p id="demo16"></p>
+<script>
+    document.getElementById('demo01').textContent = "string 的类型为：" + typeof "abc";
+    document.getElementById('demo02').textContent = "number 的类型为：" + typeof 23;
+    document.getElementById('demo03').textContent = "boolean 的类型为：" + typeof false;
+    document.getElementById('demo04').textContent = "function 的类型为：" + typeof function abc() {
+        };
+    document.getElementById('demo05').textContent = "null 的类型为：" + typeof null;
+    document.getElementById('demo06').textContent = "array 的类型为：" + typeof [];
+    document.getElementById('demo07').textContent = "data 的类型为：" + typeof new Date();
+    document.getElementById('demo08').textContent = "{} 的类型为：" + typeof {};
+    document.getElementById('demo09').textContent = "undefined 的类型为：" + typeof abc;
+
+    document.getElementById('demo10').textContent = "data 的类型为：" + (new Date).__proto__.constructor;
+    document.getElementById('demo11').textContent = "array 的类型为：" + [].__proto__.constructor;
+    document.getElementById('demo12').textContent = "object 的类型为：" + {}.__proto__.constructor;
+    document.getElementById('demo13').textContent = "string 的类型为：" + "abc".__proto__.constructor;
+    document.getElementById('demo14').textContent = "boolean 的类型为：" + false.__proto__.constructor;
+    document.getElementById('demo15').textContent = "number 的类型为：" + (3).__proto__.constructor;
+    document.getElementById('demo16').textContent = "function 的类型为：" + (function () {
+        }).__proto__.constructor;
+</script>
+</body>
+</html>
