@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Object</title>
+</head>
+<body>
+<script>
+    var person = {
+        firstName: 'John',
+        lastName: 'Doe',
+        age: 50,
+        eyeColor: 'blue',
+        fullName: function () {
+            return this.firstName + " " + this.lastName;
+        }
+    };
+
+    for (var key in person) {
+        console.log(person[key]);
+    }
+
+    console.log(person.age);
+
+    console.log(person.fullName());
+</script>
+</body>
+</html>
