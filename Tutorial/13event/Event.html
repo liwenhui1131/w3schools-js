@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JavaScript Events</title>
+</head>
+<body>
+<button id="btn1">click me!</button>
+<button id="btn2">dblclick</button>
+<input type="text" id="input">
+<p id="mouseEvent">Mouse Events</p>
+
+<script>
+    document.getElementById('btn1').onclick = function () {
+        this.textContent = Date();
+    };
+
+    document.getElementById('btn2').ondblclick = function () {
+        this.textContent = Date();
+    };
+
+    document.getElementById('input').onblur = function () {
+        console.log(1);
+    };
+
+    document.getElementById('input').onchange = function () {
+        console.log(2);
+    };
+
+    document.getElementById('input').oninput = function () {
+        console.log(3);
+    };
+
+    document.getElementById('mouseEvent').onmouseover = function () {
+        this.textContent = Date();
+    };
+
+    document.getElementById('mouseEvent').onmouseout = function () {
+        this.textContent = Date();
+    };
+</script>
+</body>
+</html>

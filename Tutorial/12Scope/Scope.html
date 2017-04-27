@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JavaScript Scope</title>
+</head>
+<body>
+<p>Local JavaScript Variables</p>
+<p id="demo1"></p>
+
+<p>Global JavaScript Variables</p>
+<p id="demo2"></p>
+
+<p>Automatically Global</p>
+<p id="demo3"></p>
+<script>
+    function myFunction1() {
+        var carName1 = "Volvo";
+    };
+    myFunction1();
+    document.getElementById('demo1').textContent = typeof carName1;
+
+    var carName2 = " Volvo";
+    function myFunction2() {
+        document.getElementById('demo2').textContent = carName2;
+    };
+    myFunction2();
+
+    function myFunction3() {
+        carName3 = "Volvo";
+    };
+    myFunction3();
+    document.getElementById('demo3').textContent = carName3;
+
+</script>
+</body>
+</html>
