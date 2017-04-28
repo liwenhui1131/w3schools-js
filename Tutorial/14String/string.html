@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JavvaSript String</title>
+</head>
+<body>
+<p>txt的长度</p>
+<p id="length"></p>
+
+<p>Special Characters</p>
+<p id="demo01"></p>
+
+<p>Strings Can be Objects</p>
+<p id="demo02"></p>
+<p id="demo03"></p>
+<script>
+    var txt = "ABCDEFGHIJ";
+    document.getElementById('length').textContent = txt.length;
+
+    var y = "We are the so-called \"Vikings\" from the north."
+    document.getElementById('demo01').textContent = y;
+
+    var a = "John";
+    var b = new String("John");
+    document.getElementById('demo02').textContent = "a的类型为：" + typeof a;
+    document.getElementById('demo03').textContent = "b的类型为：" + typeof b;
+</script>
+</body>
+</html>

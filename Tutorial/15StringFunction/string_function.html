@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>String Function</title>
+</head>
+<body>
+<p id="demo01"></p>
+<p id="demo02"></p>
+<p id="demo03"></p>
+<p id="demo04"></p>
+<p id="demo05"></p>
+<p id="demo06"></p>
+<p id="demo07"></p>
+<p id="demo08"></p>
+<p id="demo09"></p>
+<script>
+    var str = "abcabcabc";
+    var str1 = "123ffdf"
+    document.getElementById('demo01').textContent = str.indexOf("ca");
+
+    document.getElementById('demo02').textContent = str.charAt(2);
+
+    document.getElementById('demo03').textContent = str.slice(0, 1);
+
+    document.getElementById('demo04').textContent = str.slice(-1);
+
+    document.getElementById('demo05').textContent = str.substr(1, 1);
+
+    document.getElementById('demo06').textContent = str.substr(1, 1);
+
+    document.getElementById('demo07').textContent = str.substr(-2, 2);
+
+    document.getElementById('demo08').textContent = str.substring(-2, 2);
+
+    document.getElementById('demo09').textContent = str.concat(str1);
+</script>
+</body>
+</html>
