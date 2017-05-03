@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JS Date Method</title>
+</head>
+<body>
+<p id="today"></p>
+<script>
+    var today = new Date();
+    var year = today.getFullYear();
+    var month = today.getMonth() + 1;
+    var day = today.getDay();
+    var hours = today.getHours();
+    var date = today.getDate();
+    var min = today.getMinutes();
+    var sec = today.getSeconds();
+    var arr = ['星期天', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六']
+    document.getElementById("today").innerHTML = "今天是：" + year + "年" + month + "月" + date + "日" + arr[day] + hours + "时" + min + "分" + sec + "秒";
+
+    var d = new Date();
+    d.setDate(20);
+    console.log(d);
+
+    d = new Date();
+    d.setDate(d.getDate() + 50);
+    console.log(d);
+
+    var msec = Date.parse("March 21, 2012");
+    d = new Date(msec);
+    console.log(d)
+
+</script>
+</body>
+</html>
