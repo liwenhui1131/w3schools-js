@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>shuffle</title>
+</head>
+<body>
+<script>
+    function shuffle_pick_1(m) {
+        var arr = new Array(m);
+        for (var i = 0; i < m; i++) {
+            arr[i] = i;
+        }
+        var arr2 = new Array();
+        for (var i = m; i > 0; i--) {
+            var rnd = Math.floor(Math.random() * i);
+            arr2.push(arr[rnd]);
+            arr.splice(rnd, 1);
+        }
+        return arr2;
+    }
+    var arr1 = shuffle_pick_1(54);
+    console.log(arr1)
+
+    function shuffle_swap(m) {
+        var arr = new Array(m);
+        for (var i = 0; i < m; i++) {
+            arr[i] = i;
+        }
+        for (var i = 0; i < m; i++) {
+            var rnd = Math.floor(Math.random() * (i + 1)),
+                temp = arr[rnd];
+            arr[rnd] = arr[i];
+            arr[i] = temp;
+        }
+        return arr;
+    }
+    var arr2 = shuffle_swap(54);
+    console.log(arr2)
+</script>
+</body>
+</html>
