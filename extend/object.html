@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Something about Object</title>
+</head>
+<body>
+<script>
+    //    常规封装
+    function Person1(name, age, sex) {
+        this.name = name;
+        this.age = age;
+        this.sex = sex;
+    }
+
+    Person1.prototype = {
+        constructor: Person1,
+        sayHello: function () {
+            console.log('hello');
+        }
+    }
+    var o1 = new Person1("lisi", 23, "men");
+    console.log(o1);
+    o1.sayHello();
+
+    //升级版 (常见)
+    function Person2(info) {
+        this._init_(info);
+    }
+
+    Person2.prototype = {
+        constructor: Person2,
+        _init_: function (info) {
+            this.name = info.name;
+            this.age = info.age;
+            this.sex = info.sex;
+        },
+        sayHello: function () {
+            console.log('hello');
+        }
+    }
+    var o2 = new Person2("lisi");
+    console.log(o2);
+    o2.sayHello();
+
+    //new 的执行原理
+    var myNew = function (constructor, args) {
+        var o = {};
+        o.__proto__ = constructor.prototype;
+        var res = constructor.apply(o, args);
+        var type = typeof res;
+        if (['string', 'number', 'boolean', 'null', 'undefined'].indexOf(type) !== -1) {
+            return o;
+        }
+        return res;
+    }
+
+    //测试
+    function Person3(name) {
+        this.name = name;
+    }
+    Person3.prototype.sayHello = function () {
+        console.log(this.name);
+    }
+    var o3 = myNew(Person3, ['pawn']);
+    console.log(o3);
+    o3.sayHello();
+</script>
+</body>
+</html>
