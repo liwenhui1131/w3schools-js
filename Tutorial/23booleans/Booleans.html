@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JavaScript Booleans</title>
+</head>
+<body>
+<div id="bool1"></div>
+<div id="bool2"></div>
+<script>
+    document.getElementById('bool1').innerHTML = "100 is " + Boolean(100) + "<br>" +
+        "3.14 is " + Boolean(3.14) + "<br>" +
+        "-15 is " + Boolean(-15) + "<br>" +
+        "Any (not empty) string is " + Boolean('abc') + "<br>" +
+        "Even the string 'false' is " + Boolean("false") + "<br>" + "not empty string is " + Boolean('') + "<br>" +
+        "Any expression (except zero) is " + Boolean(21) + "<br>" + "number 0 is " + Boolean(0) + "<br>" + "undefined is " + Boolean(undefined) + "<br>" + "null is " + Boolean(null) + "<br>" + "NAN is " + Boolean(100 / 'z');
+
+    var x = false;
+    var y = new Boolean(false);
+    var z = new Boolean(false);
+    document.getElementById('bool2').innerHTML = ' typeof x is ' + typeof  x + '<br>' + ' typeof y is ' + typeof  y + '<br>' + '(x == y) is ' + Boolean(x == y) + '<br>' + '(x === y) is ' + Boolean(x === y) + '<br>' + '(y== z) is ' + Boolean(y == z) + '<br>';
+</script>
+</body>
+</html>

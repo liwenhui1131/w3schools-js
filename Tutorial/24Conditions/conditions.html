@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JavaScript Conditions</title>
+</head>
+<body>
+<div id="demo01"></div>
+<div id="demo02"></div>
+<div id="demo03"></div>
+<script>
+    var hours = new Date().getHours(), greeting;
+    if (hours < 18) {
+        greeting = "Good day";
+    }
+    document.getElementById('demo01').innerHTML = greeting;
+
+    if (hours < 18) {
+        greeting = "Good day";
+    } else {
+        greeting = "Good evening";
+    }
+    document.getElementById('demo02').innerHTML = greeting;
+
+    if (hours < 10) {
+        greeting = "Good morning";
+    } else if (hours < 20) {
+        greeting = "Good day";
+    } else {
+        greeting = "Good evening";
+    }
+    document.getElementById('demo03').innerHTML = greeting;
+</script>
+</body>
+</html>
