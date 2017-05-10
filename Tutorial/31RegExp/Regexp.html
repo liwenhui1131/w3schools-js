@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JavaScript RegExp</title>
+</head>
+<body>
+<script>
+    var str = "Visit W3Schools";
+    console.log(str.search(/w3schools/i));
+
+    console.log(str.search("W3Schools"));
+
+    console.log(str.replace(/microsoft/i, "W3Schools"));
+
+    console.log(str.replace("Microsoft", "W3Schools"));
+
+    var patt = /e/;
+    console.log(patt.test("The best things in life are free!"));
+
+    console.log(/e/.test("The best things in life are free!"));
+
+    console.log(/e/.exec("The best things in life are free!"));
+
+</script>
+</body>
+</html>

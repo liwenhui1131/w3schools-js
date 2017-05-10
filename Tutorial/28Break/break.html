@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JavaScript Break</title>
+</head>
+<body>
+<script>
+    for (var i = 0; i < 10; i++) {
+        if (i == 3) {
+            break;
+        }
+        console.log(i);
+    }
+
+    for (var j = 0; j < 10; j++) {
+        if (j == 3) {
+            continue;
+        }
+        console.log(j);
+    }
+
+    var cars = ["BMW", "Volvo", "Saab", "Ford"];
+    var text = '';
+    list: {
+        text += cars[0] + "<br>";
+        text += cars[1] + "<br>";
+        text += cars[2] + "<br>";
+        break list;
+        text += cars[3] + "<br>";
+        text += cars[4] + "<br>";
+        text += cars[5] + "<br>";
+    }
+    console.log(cars)
+</script>
+</body>
+</html>

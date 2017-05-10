@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>debugging</title>
+</head>
+<body>
+<p id="demo1"></p>
+
+<p id="demo2"></p>
+
+<p>With the debugger turned on, the code below should stop executing before it executes the third line.</p>
+
+<script>
+    var x = 5;
+    var y;
+
+    elem = document.getElementById("demo1");
+    elem.innerHTML = x + " " + y;
+
+    y = 7;
+    var x = 15 * 5;
+    debugger;
+    document.getElementById("demo2").innerHTML = x;
+</script>
+
+</body>
+</html>
