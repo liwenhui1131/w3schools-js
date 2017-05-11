@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Data Table</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        div {
+            width: 500px;
+            margin: 0 auto;
+        }
+
+        table {
+            width: 500px;
+            background: pink;
+        }
+
+        tr {
+            line-height: 40px;
+        }
+
+        tr td {
+            text-align: center;
+        }
+
+        form {
+            width: 500px;
+            line-height: 50px;
+            display: none;
+        }
+
+        form input {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+<div id="grid">
+    <table>
+        <thead></thead>
+        <tbody></tbody>
+    </table>
+    <form>
+    </form>
+    <input type="file">
+    <input type="button" value="覆盖">
+</div>
+<script>
+
+    function Grid(id) {
+        this.div = document.getElementById(id);
+    }
+    Grid.prototype.init = function (books) {
+        this.table = this.div.children[0];
+        this.form = this.div.children[1];
+        this.thead = this.table.children[0];
+        this.tbody = this.table.children[1];
+        this.books = [];
+        this.file = this.div.children[2];
+        this.btn = this.div.children[3];
+        this.getData(books);
+    };
+    Grid.prototype.fileEvent = function () {
+        var that = this;
+        this.btn.onclick = function () {
+            var fr = new FileReader();
+            var file = that.file.files[0];
+            fr.readAsText(file)
+            fr.onloadend = function () {
+                that.books = fr.result;
+                that.dataInit();
+            }
+        }
+    }
+    Grid.prototype.getData = function (books) {
+        var that = this;
+        var xhr = new XMLHttpRequest();
+        xhr.open('get', books);
+        xhr.send(null);
+        xhr.onreadystatechange = function () {
+            if (xhr.status = 200 && xhr.readyState == 4) {
+                that.books = xhr.responseText;
+                that.dataInit();
+            }
+        }
+    };
+    Grid.prototype.dataInit = function () {
+        this.books = JSON.parse(this.books);
+        this.initThead(this.books);
+        this.initTbody(this.books);
+        this.initForm();
+        this.initOrderEvent();
+        this.initDelEvent();
+        this.initAddEvent();
+        this.fileEvent();
+    };
+    Grid.prototype.initThead = function (data) {
+        this.keys = [];
+        var str = "<tr>";
+        for (var key in data[0]) {
+            str += "<th>" + key + "</th>";
+            this.keys.push(key);
+        }
+        str += "<td><input type='button' value='添加'></td></tr>"
+        this.thead.innerHTML = str;
+    };
+    Grid.prototype.initTbody = function (data) {
+        var str = "";
+        for (var i = 0; i < data.length; i++) {
+            str += "<tr>";
+            for (var key in data[i]) {
+                str += "<td>" + data[i][key] + "</td>"
+            }
+            str += "<td><input type='button' value='delete' class='del'></td></tr>"
+        }
+        this.tbody.innerHTML = str;
+        this.initDelEvent();
+    };
+    Grid.prototype.initForm = function () {
+        var str = "";
+        for (var i = 0; i < this.keys.length; i++) {
+            str += this.keys[i] + "：<input type='text'>";
+        }
+        str += "<button>提交</button>";
+        this.form.innerHTML = str;
+    }
+    Grid.prototype.orderRule = function (orderName, flag) {
+        return function (a, b) {
+            return (a[orderName] - b[orderName]) * flag
+        }
+    };
+    Grid.prototype.order = function (orderName, flag) {
+        this.books.sort(this.orderRule(orderName, flag));
+        this.initTbody(this.books)
+    };
+    Grid.prototype.initOrderEvent = function () {
+        var ths = this.thead.children[0].getElementsByTagName('th');
+        var that = this;
+        for (var i = 0; i < ths.length; i++) {
+            ths[i].index = i;
+            ths[i].flag = 1;
+            ths[i].onclick = function () {
+                this.flag *= -1;
+                that.order(this.innerHTML, this.flag)
+            }
+        }
+    };
+    Grid.prototype.initDelEvent = function () {
+        var that = this;
+        var dels = this.tbody.getElementsByClassName('del');
+        for (var i = 0; i < dels.length; i++) {
+            dels[i].index = i;
+            dels[i].onclick = function () {
+                that.books.splice(this.index, 1);
+                that.initTbody(that.books);
+            }
+        }
+    };
+    Grid.prototype.initAddEvent = function () {
+        var that = this;
+        var addBtn = this.thead.getElementsByTagName('input')[0];
+        addBtn.onclick = function () {
+            that.form.style.display = "block";
+            that.initsubmitEvent();
+        }
+
+    };
+    Grid.prototype.initsubmitEvent = function () {
+        var that = this;
+        this.form.onsubmit = function (e) {
+            e.preventDefault();
+            var inps = this.getElementsByTagName('input');
+            var addBook = {};
+            for (var i = 0; i < that.keys.length; i++) {
+                if (inps[i].value.trim() == "") {
+                    return;
+                }
+                addBook[that.keys[i]] = inps[i].value;
+            }
+            that.books.push(addBook);
+            that.initTbody(that.books);
+            that.form.style.display = "none";
+        }
+    }
+    var grid = new Grid('grid');
+    grid.init('data.json');
+</script>
+
+</body>
+</html>
