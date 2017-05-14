@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>contextmenu</title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        div {
+            width: 400px;
+            height: 400px;
+            background: lightpink;
+            margin: 80px auto;
+            position: relative;
+        }
+
+        ul {
+            list-style: none;
+            display: none;
+            position: absolute;
+        }
+
+        ul li {
+            width: 100px;
+            height: 30px;
+            font: 16px/30px "微软雅黑";
+            padding-left: 10px;
+            background: orange;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <ul>
+        <li>删除</li>
+        <li>删除</li>
+        <li>删除</li>
+        <li>删除</li>
+    </ul>
+</div>
+<script type="text/javascript">
+    var div = document.querySelector("div");
+    var ul = document.querySelector("ul");
+    div.oncontextmenu = function () {
+        return false;
+    }
+    div.onmousedown = function (e) {
+        var e = e || window.event;
+        if (e.button == 2) {
+            var x = e.clientX - div.offsetLeft;
+            var y = e.clientY - div.offsetTop;
+            ul.style.left = x + "px";
+            ul.style.top = y + "px";
+            ul.style.display = "block";
+        }
+    }
+    document.body.onmousedown = function (e) {
+        var e = e || window.event;
+        if (e.target != div) {
+            ul.style.display = "none";
+        }
+    }
+</script>
+</body>
+</html>

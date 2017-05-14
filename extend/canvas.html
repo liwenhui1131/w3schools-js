@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Canvas</title>
+    <style type="text/css">
+        div {
+            width: 600px;
+            margin: 0 auto;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <canvas id="canvas"></canvas>
+</div>
+<script type="text/javascript">
+    var canvas = document.getElementById("canvas");
+    canvas.height = 600;
+    canvas.width = 600;
+    var ctx = canvas.getContext("2d");
+    ctx.beginPath();
+    ctx.moveTo(0, 400);
+    ctx.lineTo(300, 300);
+    ctx.lineTo(600, 600);
+    ctx.closePath();
+    ctx.strokeStyle = "#ccc";
+    ctx.stroke();
+</script>
+</body>
+</html>

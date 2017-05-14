@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>login and register</title>
+    <style type="text/css">
+        form {
+            width: 400px;
+            height: 200px;
+            background: lightpink;
+            margin: 50px auto;
+            text-align: center;
+        }
+
+        input {
+            width: 300px;
+            height: 40px;
+            margin: 10px;
+            padding-left: 5px;
+            font: 16px/30px "微软雅黑";
+            outline: none;
+            border-radius: 6px;
+        }
+
+        input[type="button"] {
+            width: 150px;
+            text-align: center;
+            background: #fff;
+        }
+    </style>
+</head>
+<body>
+<form>
+    <input type="text" placeholder="请输入用户名" class="username"/>
+    <input type="password" placeholder="请输入密码" class="password"/>
+    <input type="button" value="login" class="login"/>
+    <input type="button" value="resiger" class="resiger"/>
+</form>
+<script type="text/javascript">
+    //获取相关元素
+    var username = document.querySelector(".username");
+    var password = document.querySelector(".password");
+    var login = document.querySelector(".login");
+    var resiger = document.querySelector(".resiger");
+    //获取相关数据
+    var userpass = window.localStorage.getItem("userpass") || "[]";
+    //绑定事件
+    resiger.onclick = function () {
+        var user = {"username": username.value, "password": password.value};
+        var newuserpass = JSON.parse(userpass)
+        for (var i = 0; i < newuserpass.length; i++) {
+            if (user.username == newuserpass[i].username) {
+                alert("该用户名已被注册");
+                return;
+            }
+        }
+        newuserpass.push(user);
+        newuserpass = JSON.stringify(newuserpass);
+        window.localStorage.setItem("userpass", newuserpass);
+    }
+    login.onclick = function () {
+        var loginname = username.value;
+        var loginpass = password.value;
+        var newuserpass = window.localStorage.getItem("userpass") || "[]";
+        var newuserpass = JSON.parse(newuserpass);
+        var flag = 0;
+        for (var i = 0; i < newuserpass.length; i++) {
+            if (loginname == newuserpass[i].username && loginpass == newuserpass[i].password) {
+                alert("登陆成功");
+                return;
+            } else {
+                flag++;
+            }
+        }
+        if (flag == newuserpass.length) {
+            alert("登陆失败");
+        }
+    }
+</script>
+</body>
+</html>
