@@ -1,0 +1,151 @@
+﻿<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>canvas</title>
+</head>
+<body>
+<canvas id="canvas1" width="400" height="300"/>
+</canvas><br>
+
+<canvas id="canvas2" width="400" height="300"/>
+</canvas><br>
+
+<canvas id="canvas3" width="400" height="300"/>
+</canvas><br>
+
+<canvas id="canvas4" width="400" height="300"/>
+</canvas><br>
+
+<canvas id="canvas5" width="400" height="300"/>
+</canvas><br>
+
+<script>
+    /**
+     * 绘制矩形的函数
+     * @param canvas1
+     */
+    function draw1(id) {
+        var canvas = document.getElementById(id);
+        if (canvas == null)
+            return false;
+        var context = canvas.getContext('2d');
+        context.fillStyle = "#EEEEFF";
+        context.fillRect(0, 0, 400, 300);
+        context.fillStyle = "red";
+        context.strokeStyle = "blue";
+        context.lineWidth = 1;
+        context.fillRect(50, 50, 100, 100);
+        context.strokeRect(50, 50, 100, 100);
+    }
+    draw1('canvas1');
+
+    /**
+     * 绘制圆形的函数
+     * @param canvas2
+     */
+    function draw2(id) {
+        var canvas = document.getElementById(id);
+        if (canvas == null)
+            return false;
+        var context = canvas.getContext('2d');
+        context.fillStyle = "#EEEEFF";
+        context.fillRect(0, 0, 400, 300);
+        var n = 0;
+        for (var i = 0; i < 10; i++) {
+            context.beginPath();
+            context.arc(i * 25, i * 25, i * 10, 0, Math.PI * 2, true);
+            context.closePath();
+            context.fillStyle = 'rgba(255, 0, 0, 0.25)';
+            context.fill();
+        }
+    }
+    draw2('canvas2');
+
+    /**
+     * 重叠绘制圆形的函数
+     * @param canvas3
+     */
+    function draw3(id) {
+        var canvas = document.getElementById(id);
+        if (canvas == null)
+            return false;
+        var context = canvas.getContext('2d');
+        context.fillStyle = "#EEEEFF";
+        context.fillRect(0, 0, 400, 300);
+        var n = 0;
+        for (var i = 0; i < 10; i++) {
+            context.arc(i * 25, i * 25, i * 10, 0, Math.PI * 2, true);
+            context.fillStyle = 'rgba(255, 0, 0, 0.25)';
+            context.fill();
+        }
+    }
+    draw3('canvas3');
+
+    /**
+     * 绘制复杂图形函数
+     * @param canvas4
+     */
+    function draw4(id) {
+        var canvas = document.getElementById(id);
+        if (canvas == null)
+            return false;
+        var context = canvas.getContext('2d');
+        context.fillStyle = "#EEEEFF";
+        context.fillRect(0, 0, 400, 300);
+        var n = 0;
+        var dx = 150;
+        var dy = 150;
+        var s = 100;
+        context.beginPath();
+        context.fillStyle = 'rgb(100,255,100)';
+        context.strokeStyle = 'rgb(0,0,100)';
+        var x = Math.sin(0);
+        var y = Math.cos(0);
+        var dig = Math.PI / 15 * 11;
+        for (var i = 0; i < 30; i++) {
+            var x = Math.sin(i * dig);
+            var y = Math.cos(i * dig);
+            context.lineTo(dx + x * s, dy + y * s);
+        }
+        context.closePath();
+        context.fill();
+        context.stroke();
+    }
+    draw4('canvas4');
+
+    /**
+     * 绘制贝塞尔曲线函数
+     * @param canvas5
+     */
+    function draw5(id) {
+        var canvas = document.getElementById(id);
+        if (canvas == null)
+            return false;
+        var context = canvas.getContext('2d');
+        context.fillStyle = "#EEEEFF";
+        context.fillRect(0, 0, 400, 300);
+        var n = 0;
+        var dx = 150;
+        var dy = 150;
+        var s = 100;
+        context.beginPath();
+        context.globalCompositeOperation = 'and';
+        context.fillStyle = 'rgb(100,255,100)';
+        var x = Math.sin(0);
+        var y = Math.cos(0);
+        var dig = Math.PI / 15 * 11;
+        context.moveTo(dx, dy);
+        for (var i = 0; i < 30; i++) {
+            var x = Math.sin(i * dig);
+            var y = Math.cos(i * dig);
+            context.bezierCurveTo(dx + x * s, dy + y * s - 100, dx + x * s + 100, dy + y * s, dx + x * s, dy + y * s);
+        }
+        context.closePath();
+        context.fill();
+        context.stroke();
+    }
+    draw5('canvas5');
+
+</script>
+</body>
+</html>
