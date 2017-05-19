@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Event</title>
+    <style>
+        div {
+            width: 100px;
+            height: 100px;
+            background: red;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <input type="button" value="clickme"/>
+</div>
+<ul id="parent-list">
+    <li id="post-1">Item 1</li>
+    <li id="post-2">Item 2</li>
+    <li id="post-3">Item 3</li>
+    <li id="post-4">Item 4</li>
+    <li id="post-5">Item 5</li>
+    <li id="post-6">Item 6</li>
+</ul>
+<script type="text/javascript">
+    var div = document.getElementsByTagName("div")[0];
+    var inp = document.getElementsByTagName("input")[0];
+
+    inp.onclick = function (event) {
+        console.log("inp被点击了");
+        var event = event || window.event;
+        if (event.stopPropagation) {
+            event.stopPropagation();
+        } else {
+            event.cancelBubble = true;
+        }
+        console.log(event)
+    }
+
+    div.onclick = function () {
+        console.log("div被点击了");
+    }
+
+    document.body.onclick = function () {
+        console.log("body被点击了");
+    }
+
+
+    document.getElementById("myDiv").addEventListener("click", function (e) {
+        if (e.target && e.target.nodeName == "A") {
+            var classes = e.target.className.split(" ");
+            if (classes) {
+                for (var x = 0; x < classes.length; x++) {
+                    if (classes[x] == "classA") {
+                        console.log("Anchor element clicked!");
+
+                    }
+                }
+            }
+
+        }
+    });
+
+</script>
+</body>
+</html>
