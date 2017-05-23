@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JavaScript Object</title>
+</head>
+<body>
+<script>
+    /**
+     * Person 构造函数
+     * @param fistName
+     */
+    function Person(firstName) {
+        this.firstName = firstName;
+        alert('Person instantiated');
+    }
+
+    var person1 = new Person('Alice');
+    var person2 = new Person('Bob');
+
+    alert('person1 is ' + person1.firstName);
+    alert('person2 is ' + person2.firstName);
+
+    /**
+     * Person1 构造函数
+     * @param fistName
+     */
+    function Person1(firstName) {
+        this.firstName = firstName;
+    }
+
+    /**
+     * Person1 构造函数原型上的方法
+     */
+    Person1.prototype.sayHello = function () {
+        alert("Hello, I'm " + this.firstName);
+    };
+
+    var person1 = new Person1("Alice");
+    var person2 = new Person1("Bob");
+
+    person1.sayHello();
+    person2.sayHello();
+
+    /**
+     * Person2 构造函数
+     * @param fistName
+     */
+    function Person2(firstName) {
+        this.firstName = firstName;
+    }
+
+    Person2.prototype.sayHello = function () {
+        alert("Hello, I'm " + this.firstName);
+    };
+
+    var person1 = new Person2("Alice");
+    var person2 = new Person2("Bob");
+    var helloFunction = person1.sayHello;
+
+    person1.sayHello();
+    person2.sayHello();
+    helloFunction();
+    alert(helloFunction === person1.sayHello);
+    alert(helloFunction === Person.prototype.sayHello);
+    helloFunction.call(person1);
+
+    /**
+     * Person3 构造函数
+     * @param fistName
+     */
+    function Person3(firstName) {
+        this.firstName = firstName;
+    }
+
+    Person3.prototype.walk = function () {
+        alert("I am walking!");
+    };
+    Person3.prototype.sayHello = function () {
+        alert("Hello, I'm " + this.firstName);
+    };
+
+    /**
+     * Student 构造函数
+     * @param fistName
+     * subject
+     */
+    function Student(firstName, subject) {
+        Person.call(this, firstName);
+
+        this.subject = subject;
+    };
+
+    Student.prototype = Object.create(Person.prototype);
+
+    Student.prototype.constructor = Student;
+
+    Student.prototype.sayHello = function () {
+        alert("Hello, I'm " + this.firstName + ". I'm studying " + this.subject + ".");
+    };
+
+    Student.prototype.sayGoodBye = function () {
+        alert("Goodbye!");
+    };
+
+    var student1 = new Student("Janet", "Applied Physics");
+    student1.sayHello();
+    student1.walk();
+    student1.sayGoodBye();
+
+    alert(student1 instanceof Person);
+    alert(student1 instanceof Student);
+</script>
+</body>
+</html>
