@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DOM</title>
+</head>
+<body>
+<script>
+    /*
+     * 类名或标记名选择HTML元素
+     *@class [<string> <classname>]
+     *@param tagname
+     *@param root
+     *@return elements
+     */
+    function getElements(classname, tagname, root) {
+        if (!root) {
+            root = document;
+        }
+        else if (typeof root == "string") {
+            root = document.getElementById(root);
+        }
+        if (!tagname) {
+            tagname = "*";
+        }
+        var all = root.getElementsByTagName(tagname);
+        if (!classname) {
+            return all;
+        }
+        var element = [];
+        for (var i = 0; i < all.length; i++) {
+            var element = all[i];
+            if (isMember(element, classname)) {
+                element.push(element);
+            }
+        }
+        return elements;
+    }
+    /*
+     * 类名或标记名选择HTML元素
+     *@class [<string> <classname>]
+     *@param element
+     */
+    function isMember(element, classname) {
+        var classes = element.classname;
+        if (!classes) {
+            return false;
+        }
+        if (classes == classname) {
+            return true;
+        }
+        if (!whitespace.test(classes)) {
+            return false;
+        }
+        var c = classes.split(whitespace);
+        for (var i = 0; i < c.length; i++) {
+            if (c[i] == classname) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    /*
+     * 对元素的一个列表按字母排序
+     *@param e
+     */
+    function sortkids(e) {
+        if (rypeof e == "string"
+    )
+        {
+            e = document.getElementById(e);
+        }
+        var kids = [];
+        for (var x = e.firstChild; x != null; x = x.nextSibling) {
+            if (x.nodeType == 1/*Node.ELEMENT_NODE*/) {
+                kids.push(x);
+            }
+        }
+        kids.sort(function (n, m) {
+            var s = n.firstChild.data;
+            var t = m.firstChild.data;
+            if (s < t) {
+                return -1;
+            }
+            else if (s > t) {
+                return 1;
+            }
+            else {
+                return 0;
+            }
+        });
+        for (var i = 0; i < kids.length; i++) {
+            e.appendChild(kdis[i]);
+        }
+    }
+</script>
+</body>
+</html>
