@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JavaScript Event</title>
+</head>
+<body>
+<div style="position:absolute; left:100px; top:100px; width:250px; background-color:white; border:1px solid black;">
+    <div style="background-color:gray; border-bottom:1px dotted black; padding:3px; font-family:sans-serif; font-weight:bold;"
+         onmousedown="drag(this.parentNode,event);">Drag Me
+    </div>
+    <p>This is a tast. Testing,testing,testing.</p>
+    <p>This is a test.</p>
+    <p>Test.</p>
+</div>
+<script>
+    /*
+     *给元素添加事件
+     *@param elementToDrag
+     *@param event
+     */
+    function drag(elementToDrag, event) {
+        var startX = event.clientX, startY = event.clientY;
+        var origX = elementToDrag.offsetLeft, origY = elementToDrag.offsetTop;
+        var deltaX = startX - origX, deltaY = startY - origY;
+        if (document.addEventListener) {
+            document.addEventListener("mousemove", moveHandler, true);
+            document.addEventListener("mouseup", upHandler, true);
+        }
+        else if (document.attachEvent) {
+            elementToDrag.setCapture();
+            elementToDrag.attachEvent("onmousemove", moveHandler);
+            elementToDrag.attachEvent("onmouseup", upHandler);
+            elementToDrag.attachEvent("onlosecapture", upHandler);
+        }
+        else {
+            var oldmovehandler = document.onmouseup;
+            var olduphandler = document.onmouseup;
+            document.onmousemove = moveHandler;
+            document.onmouseup = upHandler;
+        }
+        if (event.stopPropagation) {
+            event.stopPropagation();
+        }
+        else {
+            event.cancelBubble = true;
+        }
+        if (event.preventDefault) {
+            event.preventDefault();
+        }
+        else {
+            event.returnValue = false;
+        }
+    }
+
+    /*
+     *mousemove时触发的函数
+     *@param e
+     */
+    function moveHandler(e) {
+        if (!e) {
+            e = window.event;
+        }
+        e.target.style.left = (e.clientX - deltaX) + "px";
+        e.target.style.top = (e.clientY - deltaY) + "px";
+        if (e.stopPropagation) {
+            e.stopPropagation();
+        }
+        else {
+            e.cancelBubble = true;
+        }
+    }
+
+    /*
+     *mouseup时触发的函数
+     *@param e
+     */
+    function upHandler(e) {
+        if (!e) {
+            e = window.event;
+            if (document.removeEventListener) {
+                document.removeEventListener("mouseup", upHandler, true);
+                document.removeEventListener("mousemove", upHandler, true);
+            }
+            else if (document.detachEvent) {
+                e.target.detachEvent("onlosecapture", upHandler);
+                e.target.detachEvent("onmouseup", upHandler);
+                e.target.detachEvent("onmousemove", moveHandler);
+                e.target.releaseCapture();
+            }
+            else {
+                document.onmouseup = olduphandler;
+                document.onmousemove = oldmovehandler;
+            }
+            if (e.stopPropagation) {
+                e.stopPropagation();
+            }
+            else {
+                e.cancelBubble = ture;
+            }
+        }
+    }
+
+</script>
+</body>
+</html>
