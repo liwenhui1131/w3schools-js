@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>事件捕获</title>
+    <style>
+        div {
+            padding: 40px;
+        }
+
+        #div1 {
+            background: red;
+        }
+
+        #div2 {
+            background: green;
+        }
+
+        #div3 {
+            background: blue;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            var oDiv1 = document.getElementById('div1');
+            var oDiv2 = document.getElementById('div2');
+            var oDiv3 = document.getElementById('div3');
+            var oBtn = document.getElementById('btn1');
+            var oDiv = document.getElementById('div1');
+
+            /*
+            * 弹出id
+            * */
+            function fn1() {
+                alert(this.id);
+            }
+
+            oDiv1.addEventListener('click', fn1, true);
+            oDiv2.addEventListener('click', fn1, true);
+            oDiv3.addEventListener('click', fn1, true);
+
+            oDiv1.addEventListener('click', function () {
+                alert(1);
+            }, false);
+            oDiv1.addEventListener('click', function () {
+                alert(3);
+            }, true);
+            oDiv3.addEventListener('click', function () {
+                alert(2);
+            }, false);
+            oDiv1.onclick = fn1;
+            oDiv2.onclick = fn1;
+            oDiv3.onclick = fn1;
+
+            oBtn.onclick = function (ev) {
+                var oEvent = ev || event;
+                oEvent.cancelBubble = true;
+                oDiv.style.display = 'block';
+            }
+            document.onclick = function () {
+                oDiv.style.display = 'none';
+            }
+
+            oDiv.onmouseover = function () {
+                this.style.left = 0 + 'px';
+            }
+            oDiv.onmouseout = function () {
+                this.style.left = -100 + 'px';
+            }
+        }
+    </script>
+</head>
+<body>
+<div id="div1">
+    <div id="div2">
+        <div id="div3"></div>
+    </div>
+</div>
+<input type="button" value="按钮" id="btn1">
+</body>
+</html>
