@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>sort</title>
+</head>
+
+<body>
+<script>
+    var arr = [3,2,4,1,5];
+
+    /*
+     * 每次循环比较，取出当前的值和他的下一位进行大小的比较，如果当前值比下一个要大（小），交换位置，每次循环确定一个最大（最小）数
+     */
+    for (var i=0; i<arr.length-1; i++) {
+        var a = arr[i];
+        var b = arr[i+1];
+        if (a < b) {
+            arr[i] = b;
+            arr[i+1] = a;
+        }
+
+    }
+
+    console.log(arr);
+
+    var arr = [];
+    for (var i=0; i<30000; i++) {
+        arr.push(i);
+    }
+    arr.sort(function () {
+        return Math.random() - 0.5;
+    });
+
+    /*
+     * 每一轮的比较确定一个值，整个比较过程需要比较的次数是 长度-1，以为最后一轮的值，只有一个了，没有比较在比较了
+     * */
+
+    /*
+     * 统计循环的总次数
+     * */
+    var n = 0;
+
+    console.time('a');
+    for ( var j=0; j<arr.length-1; j++ ) {
+
+        for (var i=0; i<arr.length-1; i++) {
+            var a = arr[i];
+            var b = arr[i+1];
+            if (a < b) {
+                arr[i] = b;
+                arr[i+1] = a;
+            }
+
+            n++;
+        }
+
+    }
+    console.timeEnd('a');
+
+    console.log(n);
+    console.log(arr);
+
+    var arr = [];
+    for (var i=0; i<30000; i++) {
+        arr.push(i);
+    }
+    arr.sort(function () {
+        return Math.random() - 0.5;
+    });
+
+    var n = 0;
+
+    console.time('a');
+    for ( var j=0; j<arr.length-1; j++ ) {
+
+        /*
+         * 随着大的循环的次数的增加，对应的小的循环就应该减少，减少j次
+         * */
+        for (var i=0; i<arr.length-1-j; i++) {
+            var a = arr[i];
+            var b = arr[i+1];
+            if (a < b) {
+                arr[i] = b;
+                arr[i+1] = a;
+            }
+
+            n++;
+
+        }
+
+    }
+    console.timeEnd('a');
+
+    console.log(n);
+    console.log(arr);
+
+    // var arr = [5,4,3,1,2];
+
+    var arr = [];
+    for (var i=0; i<30000; i++) {
+        arr.unshift(i);
+    }
+    arr[29999] = 1;
+    arr[29998] = 0;
+
+    // arr.sort(function () {
+    // return Math.random() - 0.5;
+    // });
+
+    var n = 0;
+
+    console.time('a');
+    for ( var j=0; j<arr.length-1; j++ ) {
+
+        /*
+         * 随着大的循环的次数的增加，对应的小的循环就应该减少，减少j次
+         * */
+
+        /*
+         * 每次比较小的循环的时候，设置flag为真，表示已经排序好了，假设排序是ok的
+         * */
+        var flag = true;
+
+        for (var i=0; i<arr.length-1-j; i++) {
+            var a = arr[i];
+            var b = arr[i+1];
+            if (a < b) {
+                /*
+                 * 如果比较过程中走了if条件，那么就说明比较未完成，还需要下次再比较，否则就是交换位置没有发生过，表示数据已经排序好了
+                 * */
+
+                /*
+                 * 只要走了if，表示有交换，就把flag设置false
+                 * */
+                flag = false;
+                arr[i] = b;
+                arr[i+1] = a;
+            }
+
+            n++;
+
+        }
+
+        /*
+         * 循环完成以后，看下flag的值，如果还保持true，则说明上面循环是没有交换的情况发生的，表示排序ok了，如果为false就表示有过交换
+         * */
+        if (flag) {
+            break;
+        }
+
+    }
+    console.timeEnd('a');
+
+    console.log(n);
+    console.log(arr);
+
+</script>
+</body>
+</html>
