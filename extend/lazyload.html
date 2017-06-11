@@ -2,14 +2,21 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>lazyLoad</title>
+    <title>JavaScript lazyLoad</title>
 </head>
 <body>
 <img data-img="../images/pic_bulboff.gif" src="../images/pic_bulbon.gif" width="640" height="480" class='lazyload'>
 <script>
+    /**
+     * @file JavaScript lazyLoad
+     * @author 李文辉
+     * @copyright 2014-2017 海量云图（北京）数据技术有限公司
+     */
+
     var Lazy = {
-        /*
-         * $根据参数arg的来获取元素
+        /**
+         *
+         *根据参数arg的来获取元素
          * @param {string} arg
          * @param {Object} context
          * @return {Object} 获取的元素
@@ -38,8 +45,9 @@
             }
         },
 
-        /*
-         * getPos函数：获取页面的偏移量，和节点的四边位置
+        /**
+         *
+         * 获取页面的偏移量，和节点的四边位置
          * @param {Object} node
          * @return {Object}
          */
@@ -55,8 +63,9 @@
             }
         },
 
-        /*
-         * bind函数：为节点绑定事件
+        /**
+         *
+         * 为节点绑定事件
          * @param {Object} node
          * @param {string} type
          * @param {Function} handler
@@ -65,8 +74,9 @@
             node.addEventListener ? node.addEventListener(type, handler, false) : node.attachEvent('on' + type, handler);
         },
 
-        /*
-         * bind函数：为节点解绑事件
+        /**
+         *
+         * 为节点解绑事件
          * @param {Object} node
          * @param {string} type
          * @param {Function} handler
@@ -75,8 +85,8 @@
             node.removeEventListener ? node.removeEventListener(type, handler, false) : node.detachEvent('on' + type, handler);
         },
 
-        /*
-         * toArray函数：把节点转化为数组
+        /**
+         * 把节点转化为数组
          * @param {Array} eles
          * @return {Array} arr
          */
@@ -89,38 +99,32 @@
         }
     };
 
-    /*
-     * imgLazyLoad函数，判断哪些图片需要懒加载
+    /**
+     *
+     * 判断哪些图片需要懒加载
      */
     function imgLazyLoad() {
         var timer, screenHeight = document.documentElement.clientHeight;
-        // 选择所有图片
-        var allimg = Lazy.$('img');
-        // 筛选CLASS为lazyload的图片
-        var elems = Lazy.$('.lazyload', allimg);
-        // 转换为真正的数组
-        elems = Lazy.toArray(elems);
-        if (!elems.length) return;
-        // 没有发生滚动事件时如果图片在可视范围之内，也显示
-        for (var i = 0; i < elems.length; i++) {
-            // 获取图像的父元素即包裹图像的元素，判断图像是否在可视区域即直接判断父元素是否可视
+        var allimg = Lazy.$('img');// 选择所有图片
+        var elems = Lazy.$('.lazyload', allimg); // 筛选CLASS为lazyload的图片
+        elems = Lazy.toArray(elems);// 转换为真正的数组
+        if (!elems.length) return;// 没有发生滚动事件时如果图片在可视范围之内，也显示
+        for (var i = 0; i < elems.length; i++) {// 获取图像的父元素即包裹图像的元素，判断图像是否在可视区域即直接判断父元素是否可视
             var parent = elems[i].parentNode;
             var pos = Lazy.getPos(parent);
             var posT = pos.top;
             var posB = pos.bottom;
-            // 没有滚动条情况如果距离顶部的距离小于屏幕的高度则赋值SRC
-            if (posT < screenHeight) {
+            if (posT < screenHeight) {// 没有滚动条情况如果距离顶部的距离小于屏幕的高度则赋值SRC
                 elems[i].src = elems[i].getAttribute('data-img');
-                // 移除后，数组的长度减一，下一个下标需减一
-                elems.splice(i--, 1);
+                elems.splice(i--, 1);// 移除后，数组的长度减一，下一个下标需减一
             }
         }
-        // 绑定scroll事件
-        Lazy.bind(window, 'scroll', loading);
+        Lazy.bind(window, 'scroll', loading);// 绑定scroll事件
         Lazy.bind(window, 'resize', loading);
 
-        /*
-         * loading函数，图片的懒加载
+        /**
+         *
+         * 图片的懒加载
          */
         function loading() {
             timer && clearTimeout(timer);
@@ -133,13 +137,11 @@
                     var posT = pos.top;
                     var posB = pos.bottom;
                     var screenTop = screenHeight + scrollTop;
-                    // 元素顶部出现在可视区  或者  元素底部出现在可视区
-                    if ((posT > scrollTop && posT < screenTop) || (posB > scrollTop && posB < screenTop)) {
+                    if ((posT > scrollTop && posT < screenTop) || (posB > scrollTop && posB < screenTop)) {  // 元素顶部出现在可视区  或者  元素底部出现在可视区
                         elems[i].src = elems[i].getAttribute('data-img');
                         elems.splice(i--, 1);
                     } else {
-                        // 去掉以下注释开启图片预加载
-                        // new Image().src = elems[i].getAttribute('data-img');
+                        // new Image().src = elems[i].getAttribute('data-img');// 去掉注释开启图片预加载
                     }
                 }
                 if (!elems.length) {
