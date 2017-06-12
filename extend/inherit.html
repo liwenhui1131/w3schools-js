@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JavaScript Inherit</title>
+</head>
+<body>
+<script>
+    /**
+     * @file JavaScript Inherit
+     * @author 李文辉
+     * @copyright 2014-2017 海量云图（北京）数据技术有限公司
+     */
+
+    /**
+     * 构造函数
+     * @param str
+     */
+    function ClassA(str) {
+        this.str = str;
+        this.printstr = function () {
+            document.write(this.str);
+            document.write("<br>");
+        }
+        this.getstr = function () {
+            return this.str;
+        }
+    }
+
+    /**
+     * 对象冒充实现继承
+     * @param {String} name
+     * @param {string} str
+     */
+    function classB(name, str) {
+        this.newMethod1 = ClassA; //相当于将classA代码体中的内容搬到这里
+        this.newMethod1(str);
+        delete this.newMethod1;
+        this.name = name; //新的方法和属性的定义须在删除了newMethod之后定义，因为可能覆盖超类的属性和方法。
+        this.sayName = function () {
+            document.write(this.name);
+            document.write("<br>");
+        }
+
+    }
+
+    /**
+     * 实例化
+     * @param {String} 'Amy'
+     * @param {String} "helloworld"
+     */
+    var a = new classB("Amy", "helloworld");
+    a.printstr();
+    alert(a.getstr());
+    a.sayName();
+
+    /**
+     *构造函数
+     * @param str
+     */
+    function ClassA(str) {
+        this.str = str;
+        this.printstr = function () {
+            document.write(this.str);
+            document.write("<br>");
+        }
+        this.getstr = function () {
+            return this.str;
+        }
+    }
+
+    /**
+     * call实现继承
+     * @param {String} name
+     * @param {string} str
+     */
+    function classB(name, str) {
+        //利用call方法实现继承
+        ClassA.call(this, str);
+        this.name = name;
+        this.sayName = function () {
+            document.write(this.name);
+            document.write("<br>");
+        }
+
+    }
+
+    /**
+     * 实例化
+     * @param {String} 'Amy'
+     * @param {String} "helloworld"
+     */
+    var a = new classB("Amy", "helloworld");
+    a.printstr();
+    alert(a.getstr());
+    a.sayName();
+
+
+    /**
+     *构造函数
+     */
+    function cA() {
+    };
+    cA.prototype.name = "John";
+    cA.prototype.sayName = function () {
+        document.write(this.name);
+        document.write("<br>");
+    }
+
+    /**
+     * 原型链实现继承
+     */
+    function cB() {
+    };
+    cB.prototype = new cA();
+    cB.prototype.age = 23;
+    cB.prototype.sayAge = function () {
+        document.write(this.age);
+        document.write("<br>");
+    }
+    var objB = new cB();
+    objB.sayAge();
+    objB.sayName();
+    document.write("is objB the instance of cA " + (objB instanceof cA));
+    document.write("<br>");
+    document.write("is objB the instance of cB " + (objB instanceof cB));
+    document.write("<br>");
+</script>
+</body>
+</html>
