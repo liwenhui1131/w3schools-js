@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>magnifying glass</title>
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+        }
+
+        #box {
+            width: 430px;
+            height: 430px;
+            margin: 100px;
+            margin-left: 17%;
+            position: relative;
+        / / 这里使用相对定位，好让其他的元素能依靠这个元素定位
+        }
+
+        #move {
+            background-color: green;
+            width: 220px;
+            height: 220px;
+            position: absolute;
+            left: 0px;
+            top: 0px;
+            display: none;
+        / / 先让他隐藏，用js使其显示
+        }
+
+        #target {
+            width: 430px;
+            height: 430px;
+            overflow: hidden;
+            position: absolute;
+            top: 0px;
+            left: 450px;
+            display: none;
+        / / 先让他隐藏，用js使其显示
+        }
+
+        #target img {
+            width: 800px;
+            height: 800px;
+            position: absolute;
+            top: 0px;
+            left: 0px;
+        }
+    </style>
+</head>
+<body onload="bigimg()">
+<div id="box">
+    <img src="../images/pic.JPG" alt="#" width="430px" height="430px">
+    <div id="move"></div>
+    <div id="target">
+        <img id="targetImg" src="../images/pic.JPG" alt="#">
+    </div>
+</div>
+<script>
+    /**
+     * @file magnifying glass
+     * @author 李文辉
+     * @copyright 2014-2017 海量云图（北京）数据技术有限公司
+     */
+
+    /**
+     * 鼠标移动到图片时放大该区域
+     */
+    function bigimg() {
+        var box = document.getElementById("box");
+        var moveBox = document.getElementById("move");
+        var target = document.getElementById("target");
+        var b_bimg = document.getElementById("targetImg");
+
+        box.onmouseover = function () {//鼠标移动到box上显示大图片和选框
+            target.style.display = "block";
+            moveBox.style.display = "block";
+        }
+
+        box.onmouseout = function () {//鼠标移开box不显示大图片和选框
+            target.style.display = "none";
+            moveBox.style.display = "none";
+        }
+
+        box.onmousemove = function (e) {//获取鼠标位置
+            var x = e.clientX;//鼠标相对于视口的位置
+            var y = e.clientY;
+            var t = box.offsetTop;//box相对于视口的位置
+            var l = box.offsetLeft;
+            var left = x - l - moveBox.offsetWidth / 2;//计算move的位置
+            var top = y - t - moveBox.offsetHeight / 2;
+            if (top <= 0)//滑到box的最顶部
+                top = 0;
+            else if (top >= box.offsetHeight - moveBox.offsetHeight)//滑到box的最底部
+                top = box.offsetHeight - moveBox.offsetHeight;
+            if (left <= 0)//滑到box的最左边
+                left = 0;
+            else if (left >= box.offsetWidth - moveBox.offsetWidth)//滑到box的最右边
+                left = box.offsetWidth - moveBox.offsetWidth;
+            moveBox.style.top = top + "px";//设置move的位置
+            moveBox.style.left = left + "px";
+            var w = left / (box.offsetWidth - moveBox.offsetWidth);//计算移动的比例
+            var h = top / (box.offsetHeight - moveBox.offsetHeight);
+            var targetImg_top = (targetImg.offsetHeight - target.offsetHeight) * h;//计算大图的位置
+            var targetImg_left = (targetImg.offsetWidth - target.offsetWidth) * w;
+            targetImg.style.top = -targetImg_top + "px";//设置大图的位置信息
+            targetImg.style.left = -targetImg_left + "px";
+        }
+
+    }
+</script>
+</body>
+</html>
+
