@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JavaScript Ajax</title>
+</head>
+<body>
+<script>
+    'use strict';
+    /**
+     * @file JavaScript Ajax
+     * @author 李文辉
+     * @copyright 2014-2017 海量云图（北京）数据技术有限公司
+     */
+
+    /**
+     * 封裝AJAX
+     * @param {Object} option
+     *@return {Object} responseData
+     */
+    function Ajax(option) {
+        // 定义domain,方便环境切换
+        var domain = 'https://' + window.location.host + '/';
+        var url = domain + option.urlStr;
+        var type = option.ajaxType;
+        var data = option.ajaxData;
+        var xhrRequest = new XMLHttpRequest();
+        var str = null;
+        xhrRequest.open(type, url, true);
+        if (type === "POST" && data != null) {
+            xhrRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
+            for (var key in data) {
+                str += '&' + key + '=' + data[key];
+                str = str.slice(1);
+            }
+        }
+        xhrRequest.onreadystatechange = function () {
+            if (xhrRequest.readyState == 4 && xhrRequest.status == 200 || xhrRequest.status == 304) {
+                // 1、格式化返回的数据
+                var responseData = JSON.parse(xhrRequest.responseText);
+                console.log(responseData);
+                return responseData;
+            }
+        }
+        xhrRequest.send(str);
+    }
+
+    /**
+     * POST：定义请求参数
+     * @type {{ajaxType: string, urlStr: string, ajaxData: {HTTP_USER_TOKEN: *, HTTP_USER_UID: *, anchor_pfid: *, broke_pfid: *, date}}}
+     */
+    var postOption = {
+        ajaxType: "POST",                                //必须："GET"/"POST"
+        urlStr: "v2/html/broke/get_broke_ranked_info",    //必须："string类型"
+        ajaxData: {                                        //必须：POST时候为object{key:value}，GET的时候直接为：null
+            "HTTP_USER_TOKEN": token,
+            "HTTP_USER_UID": pfid,
+            "anchor_pfid": anchor_pfid,
+            "broke_pfid": pfid,
+            "date": date
+        }
+    }
+
+    Ajax(postOption);
+
+    /**
+     * GET：定义请求参数
+     * @type {{ajaxType: string, urlStr: string, ajaxData: null}}
+     */
+    var getOption = {
+        ajaxType: "GET",                                    //必须：
+        urlStr: "v2/html/broke/get_broke_ranked_info",    //必须：
+        ajaxData: null                                    //必须：
+    }
+    Ajax(getOption);
+</script>
+</body>
+</html>
