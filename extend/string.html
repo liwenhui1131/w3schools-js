@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JavaScript String</title>
+</head>
+<body>
+<script>
+    /**
+     * @file JavaScript String
+     * @author 李文辉
+     * @copyright 2014-2017 海量云图（北京）数据技术有限公司
+     */
+
+    var a = "hello";
+    var b = new String("hello");
+
+    /**
+     *  charAt()根据下标 找字符串中的字符
+     */
+    alert(a.charAt(3));//根据下标返回字符串某个字符
+    alert(a.charAt(10));//空的，找不到这个下标
+
+
+    /**
+     * charCodeAt()返回指定位置的字符
+     */
+    var a = "Hello world!Hello world!";
+    var d = "这是一个字符串";
+    alert(a.charCodeAt(1));//101
+    alert(d.charCodeAt(3));//26465
+
+
+    /**
+     * String.fromCharCode()利用unicode编码返回一个字符串
+     */
+    alert(String.fromCharCode(65, 66, 67));//
+
+
+    /**
+     * concat()用于连接一个或多个字符串 不改变原数组
+     */
+    var a = "Hello world!Hello world!";
+    var b = "日照香炉生紫烟";
+    var c = "不及汪伦送我情";
+    alert(a.concat(b, c))
+
+
+    /**
+     *  search()找到要匹配的字符串，如果找到，返回第一次匹配的下标，如果未找到，返回-1
+     */
+    var c = "123456789";
+    alert(c.search("567"));//4
+    alert(c.search("5671"));//-1
+
+    /**
+     * replace()用一些字替换另一些字符
+     */
+    var d = "小黄是条狗，小黄很帅";
+    var e = d.replace("小黄", "小黑");//小黄变小黑，只变第一次
+    var e = d.replace(/小黄/g, "小黑")//字符串内的都改变
+    alert(e);
+
+    /**
+     *split()用于把一个字符串分割为字符串数组,原数组不变
+     */
+    var a = "hello world!";
+    alert(a.split(""));
+    alert(a.split("o"));//hell, w,rld
+
+    /**
+     * indexOf()返回某个指定字符在字符串中首次出现的位置
+     */
+    var a = "hello world!";
+    alert(a.indexOf("o"));//4
+    alert(a.indexOf("p"));//-1  没有搜到出-1
+
+    /**
+     * lastIndexOf()从后向前搜寻
+     */
+    var a = "hello world!";
+    alert(a.lastIndexOf("o"));//7
+
+    /**
+     *Match()
+     */
+    var a = "Hello world!Hello world!";
+    alert('world')//找到第一个就不找了5
+    alert(a.match(/world/g));//正则表达式(全局寻找)
+
+    /**
+     * slice()可提取字符串某个部分  可负数
+     */
+    var a = "Hello world!Hello world!";
+    alert(a.slice(5, 13));//要第一个下标，不要第二个下标
+    alert(a.slice(-15, -7));
+
+    /**
+     * substring()与slice一样，但不接受负数
+     */
+    var a = "Hello world!Hello world!";
+    alert(a.substring(4, 12));
+    alert(a.substring(-3, -1));//啥也没有
+
+    /**
+     * substr()截取从指定下标开始，指定数目的字符
+     */
+    var a = "Hello world!Hello world!";
+    alert(a.substr(4, 6));//从下标4开始向后截取6个
+
+    /**
+     * toLowerCase()将字符串转换为小写
+     */
+    var a = "Hello world!Hello world!";
+    alert(a.toLowerCase());
+
+    /**
+     * toUpperCase()将字符串转换为大写
+     */
+    var a = "Hello world!Hello world!";
+    alert(a.toUpperCase());
+</script>
+</body>
+</html>
