@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JavaScript This</title>
+</head>
+<body>
+<script>
+    /**
+     * @file JavaScript Ajax
+     * @author 李文辉
+     * @copyright 2014-2017 海量云图（北京）数据技术有限公司
+     */
+
+    /**
+     * 谁调用了方法，该方法的this就指向谁
+     */
+    function foo1() {
+        console.log(this.a)
+    }
+
+    var a = 3;
+
+    var obj = {
+        a: 2,
+        foo: foo
+    };
+
+    obj.foo();
+
+    /**
+     * 如果存在多次调用，对象属性引用链只有上一层或者说最后一层在调用位置中起作用
+     */
+    function foo1() {
+        console.log(this.a)
+    }
+
+    var obj2 = {
+        a: 42,
+        foo: foo1
+    }
+
+    var obj1 = {
+        a: 2,
+        obj2: obj2
+    }
+
+    obj1.obj2.foo1();
+
+    /**
+     * 一个最常见的this绑定问题就是被隐式绑定的函数会丢失绑定对象，
+     * 也就是说他回应用默认绑定，从而把this绑定到全局对象或者undefined上，取决于是否是严格模式
+     */
+    function foo3() {
+        console.log(this.a)
+    }
+
+    var obj1 = {
+        a: 2,
+        foo: foo3
+    }
+
+    var bar = obj1.foo3; // 函数别名！
+
+    var a = "oops, global"; // a是全局对象的属性
+
+    bar(); // "oops, global"
+
+    /**
+     * 参数传递其实就是一种隐式赋值，传入函数时也会被隐式赋值
+     */
+    function foo3() {
+        console.log(this.a)
+    }
+
+    function doFoo(fn) {
+        // fn 其实引用的是 foo
+        fn(); // <-- 调用位置！
+    }
+
+    var obj = {
+        a: 2,
+        foo: foo
+    }
+
+    var a = "oops, global"; // a是全局对象的属性
+
+    doFoo(obj.foo3); // "oops, global"
+
+    /**
+     * foo使用apply函数绑定了obj，也就是说foo中的this将指向obj，与此同时，
+     * 使用arguments（不限制传入参数的数量）作为参数传入foo函数中
+     * @param something
+     * @returns {*}
+     */
+    function foo4(something) {
+        console.log(this.a, something)
+        return this.a + something
+    }
+
+    var obj = {
+        a: 2
+    }
+
+    var bar = function () {
+        return foo4.apply(obj, arguments)
+    }
+
+    var b = bar(3); // 2 3
+    console.log(b); // 5
+
+</script>
+</body>
+</html>
