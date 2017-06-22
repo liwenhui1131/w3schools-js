@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JavaScript DOM</title>
+</head>
+<body>
+<div id="div1">
+    <h1>培训课程</h1>
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+    </ul>
+</div>
+<script>
+    /**
+     * @file JavaScript Ajax
+     * @author 李文辉
+     * @copyright 2014-2017 海量云图（北京）数据技术有限公司
+     */
+
+        //获取关系的属性
+    var oDiv = document.getElementById("div1");
+    console.log(oDiv.childNodes);//获取所有的子节点
+    console.log(oDiv.children);//获取所有的元素子节点
+
+    /**
+     * 模拟children方法，实现获取指定元素下的元素子节点
+     * @param {Object} ele
+     * @param {String} tagName 获取元素的类型
+     * @returns {Array}
+     */
+    function getMyChildren(ele, tagName) {
+        var ary = [], nodes = ele.childNodes;
+        for (var i = 0; i < nodes.length; i++) {
+            var cur = nodes[i];
+            if (cur.nodeType === 1) {
+                if (tagName) {
+                    if (cur.nodeName.toLowerCase === tagName.toLowerCase) {
+                        ary.push(cur)
+                    }
+
+                } else {
+
+                    ary.push(cur);
+                }
+
+            }
+        }
+        return ary;
+
+    }
+
+    /**
+     * 获取一个元素的上一个哥哥元素子节点　
+     * @param {Object} ele
+     * @returns {*|Node}
+     */
+    function prev(ele) {
+        var pre = ele.previousSibling;
+        while (pre && pre.nodeType !== 1) {
+            pre = pre.previousSibling;
+        }
+        return pre;
+    }
+
+    /**
+     *获取一个元素的所有的哥哥元素节点
+     * @param {Object} ele
+     * @returns {Array}
+     */
+    function prevAll(ele) {
+        var pre = ele.previousSibling, ary = [];
+        while (pre) {
+            if (pre, nodeType === 1) {
+                ary.unshift(pre);
+            }
+            pre = pre.previousSibling;
+        }
+        return ary;
+    }
+</script>
+</body>
+</html>
