@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JavaScript Sort</title>
+</head>
+<body>
+<script>
+    /**
+     * @file JavaScript Sort
+     * @author 李文辉
+     * @copyright 2014-2017 海量云图（北京）数据技术有限公司
+     */
+
+    var arr = [3, 6, 7, 2, 6, 4, 1, 6, 8, 24, 12, 53];
+    /**
+     *选择排序
+     * @param {array} arr
+     * @return {array}
+     */
+    function sort(arr) {
+        if (arr.length == 1) {
+            return arr;
+        }
+        var min = arr[0], index = 0;
+        for (var i = 0; i < arr.length; i++) {
+            // 计算最小值，如果数组当前值比之前的值还小那么min等于最小值。
+            if (arr[i] < min) {
+                min = arr[i];
+                // 保存下最小值的索引，好用来后面删除它
+                index = i;
+            }
+        }
+        // 删除最小值
+        var prev = arr.splice(index, 1);
+        // 通过递归，将这一轮中的最小值合并下一轮的最小值，直到arr的length为1停止递归。
+        return prev.concat(sort(arr));
+    }
+    console.log(sort(arr));
+
+    /**
+     * 数组去重
+     * @param {Array} arr
+     * @return {Array}
+     */
+    var arr1 = [3, 6, 7, 2, 5, 5, 6, 4, 1, 6, 8, 24, 12, 53];
+    function sort(arr) {
+        var obj = {};
+        var t = [];
+        for (var i = 0; i < arr.length; i++) {
+            // 判断这个对象的属性是否和数组的值相同，相同则不添加，否则给这个对象添加这个值
+            if (!(obj[arr[i]] === arr[i])) {
+                obj[arr[i]] = arr[i];
+                // 把这个过滤完以后的值添加到我们的新数组中。
+                t.push(arr[i]);
+            }
+        }
+        return t;
+    }
+    console.log(sort(arr1));
+
+    /**
+     * 快捷排序
+     * @param {array} arr
+     * @return {array}
+     */
+    function sort1(arr) {
+        return quickSort(arr, 0, arr.length - 1);
+        function quickSort(arr, l, r) {
+            if (l < r) {
+                var mid = arr[parseInt((l + r) / 2)], i = l - 1, j = r + 1;
+                while (true) {
+                    //大的放到右边，小的放到左边, i与j均为游标
+                    while (arr[++i] < mid);
+                    while (arr[--j] > mid);
+                    if (i >= j)break;//判断条件
+                    var temp = arr[i];
+                    arr[i] = arr[j];
+                    arr[j] = temp;
+                }
+                quickSort(arr, l, i - 1);
+                quickSort(arr, j + 1, r);
+            }
+            return arr;
+        }
+    }
+    var list = [49, 38, 65, 97, 76, 13, 27];
+    console.log(sort1(list));
+</script>
+</body>
+</html>
