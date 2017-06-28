@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JavaScript Sort</title>
+</head>
+<body>
+<script>
+    /**
+     * @file JavaScript Sort
+     * @author 李文辉
+     * @copyright 2014-2017 海量云图（北京）数据技术有限公司
+     */
+
+    /**
+     *希尔排序
+     * @param {array} arr
+     * @returns {array}
+     */
+    function shellSort(array) {
+        var stepArr = [1750, 701, 301, 132, 57, 23, 10, 4, 1]; // reverse()在维基上看到这个最优的步长较小数组
+        var i = 0;
+        var stepArrLength = stepArr.length;
+        var len = array.length;
+        var len2 = parseInt(len / 2);
+        for (; i < stepArrLength; i++) {
+            if (stepArr[i] > len2) {
+                continue;
+            }
+            stepSort(stepArr[i]);
+        }
+
+        /**
+         * 排序一个步长
+         * @param {number} step
+         */
+        function stepSort(step) {
+            //console.log(step) 使用的步长统计
+            var i = 0, j = 0, f, tem, key;
+            var stepLen = len % step > 0 ? parseInt(len / step) + 1 : len / step;
+            for (; i < step; i++) {// 依次循环列
+                for (j = 1; /*j < stepLen && */step * j + i < len; j++) {//依次循环每列的每行
+                    tem = f = step * j + i;
+                    key = array[f];
+
+                    while ((tem -= step) >= 0) {// 依次向上查找
+                        if (array[tem] > key) {
+                            array[tem + step] = array[tem];
+                        } else {
+                            break;
+                        }
+                    }
+                    array[tem + step] = key;
+                }
+            }
+        }
+
+        return array;
+    }
+
+    /**
+     *将序列中的第一个元素看成一个有序的子序列，然后不段向后比较交换比较交换。
+     * @param {array} arr
+     * @returns {array}
+     */
+    function insertSort(arr) {
+        var key;
+        for (var j = 1; j < arr.length; j++) {
+            //排好序的
+            var i = j - 1;
+            key = arr[j];
+            while (i >= 0 && arr[i] > key) {
+                arr[i + 1] = arr[i];
+                i--;
+            }
+            arr[i + 1] = key;
+        }
+        return arr;
+    }
+</script>
+</body>
+</html>
